@@ -1,1 +1,0 @@
-$env:Path += ";D:\PortableApp\PortableGit\bin"
