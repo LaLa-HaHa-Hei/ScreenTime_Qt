@@ -6,7 +6,10 @@ ViewHistoryWindow::ViewHistoryWindow(QString jsonFilePath, QWidget *parent) :
     ui(new Ui::ViewHistoryWindow)
 {
     ui->setupUi(this);
-    //加载知道的json文件
+    //修改窗口标题
+    QFileInfo fileInfo(jsonFilePath);
+    setWindowTitle("查看历史：" + fileInfo.baseName());
+    //加载json文件
     QFile file(jsonFilePath);
     file.open((QIODevice::ReadOnly));
     QByteArray jsonData = file.readAll();

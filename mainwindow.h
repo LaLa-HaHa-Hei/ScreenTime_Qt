@@ -134,6 +134,10 @@ public:
     }
 
 private slots:
+    void onAboutToQuit()//关机前保存数据
+    {
+        SaveData();
+    }
     void on_actionOpenAppDir_triggered();//打开程序目录
     void on_actionExitApp_triggered();
     void on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason reason);//托盘点击
@@ -162,11 +166,11 @@ private:
     QString absluteExeIconFolderPath;
     QString absluteJsonDataFilePath;
     Settings settings;
-    QDate today;
+    const QDate today = QDate::currentDate();
     QList<ExeItem*> exeItemList;
     void CheckDate()
     {
-        if (today > QDateTime::currentDateTime().date())//已经第二天
+        if (today < QDateTime::currentDateTime().date())//已经第二天
         {
             ShellExecuteW(NULL, L"open", reinterpret_cast<const wchar_t *>(QCoreApplication::applicationFilePath().replace("/", "\\").utf16()), NULL, NULL, SW_SHOW);
             ExitApp();

@@ -6,7 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    today =  QDate::currentDate();
+    //关机事件
+    connect(QCoreApplication::instance(), &QCoreApplication::aboutToQuit, this, &MainWindow::onAboutToQuit);
     //相对路径转绝对路径
     QString exeDirPath = QCoreApplication::applicationDirPath().replace('/', '\\');
     if (settings.ExeIconFolderPath.startsWith(".\\"))
