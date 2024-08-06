@@ -129,6 +129,8 @@ public:
     void ShowWindow()
     {
         show();
+        raise();
+        activateWindow();
         RefreshListWidget();
         refreshListWidgetTimer.start();
     }
