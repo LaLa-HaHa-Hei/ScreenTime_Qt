@@ -74,8 +74,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpenAppDir_triggered()
 {
-    const wchar_t* wPath = reinterpret_cast<const wchar_t *>(QString("/select,%1").arg(QCoreApplication::applicationFilePath().replace("/", "\\")).utf16());
-    ShellExecuteW(NULL, L"open", L"explorer.exe", wPath, NULL, SW_SHOW);
+    QString AppDir = QCoreApplication::applicationFilePath().replace("/", "\\");
+    // QString()是临时对象，不能用wchar_t* wPath = .......
+    ShellExecuteW(NULL, L"open", L"explorer.exe", reinterpret_cast<const wchar_t *>(QString("/select,\"%1\"").arg(AppDir).utf16()), NULL, SW_SHOW);
 }
 
 
